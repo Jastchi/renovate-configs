@@ -1,0 +1,141 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "osvVulnerabilityAlerts": true,
+  "pinDigests": true,
+  "schedule": ["every 2 weeks on monday"],
+  "minimumReleaseAge": "7 days",
+  "updateNotScheduled": false,
+  "rebaseWhen": "conflicted",
+  "internalChecksFilter": "strict",
+  "prCreation": "not-pending",
+  "pep621": {
+    "rangeStrategy": "pin"
+  },
+  "lockFileMaintenance": {
+    "schedule": ["every 2 weeks on monday"]
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "minimumReleaseAge": "0 days",
+    "prCreation": "immediate",
+    "internalChecksFilter": "none",
+    "schedule": ["at any time"],
+    "labels": ["security"]
+  },
+  "packageRules": [
+    {
+      "description": "Never update requires-python; Python version is managed manually.",
+      "matchDepTypes": ["requires-python"],
+      "enabled": false
+    },
+    {
+      "description": "Group all Python (pep621) non-major updates into one PR.",
+      "matchManagers": ["pep621"],
+      "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],
+      "groupName": "Python dependencies"
+    },
+    {
+      "description": "Group all Python (pep621) major updates into one PR.",
+      "matchManagers": ["pep621"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "Python major updates"
+    },
+    {
+      "description": "Group all pip_requirements non-major updates into one PR.",
+      "matchManagers": ["pip_requirements"],
+      "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],
+      "groupName": "pip requirements"
+    },
+    {
+      "description": "Group all pip_requirements major updates into one PR.",
+      "matchManagers": ["pip_requirements"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "pip requirements major updates"
+    },
+    {
+      "description": "Group all Docker (Dockerfile + docker-compose) non-major updates into one PR.",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],
+      "groupName": "Docker dependencies"
+    },
+    {
+      "description": "Group all Docker (Dockerfile + docker-compose) major updates into one PR.",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "Docker major updates"
+    },
+    {
+      "description": "Group all npm non-major updates into one PR.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],
+      "groupName": "JavaScript dependencies"
+    },
+    {
+      "description": "Group all npm major updates into one PR.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "JavaScript major updates"
+    },
+    {
+      "description": "Group all GitHub Actions non-major updates into one PR.",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],
+      "groupName": "GitHub Actions dependencies"
+    },
+    {
+      "description": "Group all GitHub Actions major updates into one PR.",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "GitHub Actions major updates"
+    },
+    {
+      "description": "Group all pre-commit non-major updates into one PR.",
+      "matchManagers": ["pre-commit"],
+      "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],
+      "groupName": "pre-commit dependencies"
+    },
+    {
+      "description": "Group all pre-commit major updates into one PR.",
+      "matchManagers": ["pre-commit"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "pre-commit major updates"
+    },
+    {
+      "description": "Group all prek non-major updates into one PR.",
+      "matchManagers": ["prek"],
+      "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],
+      "groupName": "prek dependencies"
+    },
+    {
+      "description": "Group all prek major updates into one PR.",
+      "matchManagers": ["prek"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "prek major updates"
+    },
+    {
+      "description": "Group all Cloud Build non-major updates into one PR.",
+      "matchManagers": ["cloudbuild"],
+      "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],
+      "groupName": "Cloud Build dependencies"
+    },
+    {
+      "description": "Group all Cloud Build major updates into one PR.",
+      "matchManagers": ["cloudbuild"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "Cloud Build major updates"
+    },
+    {
+      "description": "Group uv Docker base image and python interpreter non-major updates together — they must stay in sync.",
+      "matchPackageNames": ["ghcr.io/astral-sh/uv", "python"],
+      "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],
+      "groupName": "python-runtime"
+    },
+    {
+      "description": "Group uv Docker base image and python interpreter major updates together.",
+      "matchPackageNames": ["ghcr.io/astral-sh/uv", "python"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "python-runtime major updates"
+    }
+  ]
+}
