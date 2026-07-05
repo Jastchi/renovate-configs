@@ -30,6 +30,11 @@
       "enabled": false
     },
     {
+      "description": "Don't gate one-time pin/pinDigest operations on minimumReleaseAge. The value being pinned is what's currently in use, so the 7-day window adds no safety here. Without this, grouped pin PRs can get stuck pending forever because at least one dependency in the group typically has a release within the last 7 days.",
+      "matchUpdateTypes": ["pin", "pinDigest"],
+      "minimumReleaseAge": "0 days"
+    },
+    {
       "description": "Group all Python (pep621) non-major updates into one PR.",
       "matchManagers": ["pep621"],
       "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],
