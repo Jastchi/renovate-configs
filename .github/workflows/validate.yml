@@ -1,0 +1,35 @@
+name: Validate Renovate config
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Validate every preset in the repo against the latest Renovate release -
+      # the same version Mend's hosted app runs — so an unsupported manager,
+      # deprecated option, invalid value, or bad matchPackageNames regex fails
+      # CI here rather than silently erroring in every consumer repo.
+      # --strict also fails on warnings.
+      - name: renovate-config-validator
+        run: |
+          shopt -s nullglob
+          files=(*.json)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No JSON presets found to validate." >&2
+            exit 1
+          fi
+          echo "Validating: ${files[*]}"
+          npx --yes --package renovate@latest -- renovate-config-validator --strict "${files[@]}"
