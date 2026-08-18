@@ -35,6 +35,11 @@
       "minimumReleaseAge": "0 days"
     },
     {
+      "description": "Freeze a digest-update branch once opened. Refs that publish new digests faster than minimumReleaseAge (e.g. :latest tags rebuilt daily) would otherwise never clear the 7-day check — every rebase adopts the newest digest and resets its own clock, so with prCreation=not-pending the PR is never created. rebaseWhen=never keeps the branch pinned to whatever digest it already has, so that one digest ages out on its own; use the PR's rebase/retry checkbox to pull in a newer digest or resolve a conflict manually.",
+      "matchUpdateTypes": ["digest"],
+      "rebaseWhen": "never"
+    },
+    {
       "description": "Group all Python (pep621) non-major updates into one PR.",
       "matchManagers": ["pep621"],
       "matchUpdateTypes": ["pin", "pinDigest", "minor", "patch", "digest"],

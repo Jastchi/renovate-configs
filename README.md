@@ -27,6 +27,7 @@ Then add only repo-specific rules: package freezes, version constraints, custom 
 - **No automerge** — all PRs require manual merge, including security fixes
 - **Bi-weekly schedule** — PRs open every other Monday
 - **7-day minimum release age** before PRs are created (security alerts bypass this)
+- **Digest branches are frozen once created** — `:latest`-style refs republish faster than 7 days, so rebasing would reset the release-age clock forever and no PR would ever open
 - **Vulnerability alerts** fire immediately, bypass schedule, labelled `security`
 - **`requires-python` never updated** — managed manually
 - **All update types allowed** — minor, patch, major each get their own grouped PR
