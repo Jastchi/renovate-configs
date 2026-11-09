@@ -21,7 +21,8 @@
     "prCreation": "immediate",
     "internalChecksFilter": "none",
     "schedule": ["at any time"],
-    "labels": ["security"]
+    "labels": ["security"],
+    "groupName": "Security fixes"
   },
   "packageRules": [
     {
